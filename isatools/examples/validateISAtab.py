@@ -20,7 +20,7 @@ def main(args):
 
     totalerrors = 0
     totalwarnings = 0
-
+    
     for i in range(1, len(args)):
         print("-" * 75)
         if not os.path.isfile(args[i]):
@@ -40,7 +40,14 @@ def main(args):
                 totalerrors += numerrors
                 totalwarnings += numwarnings
                 numfiles += 1
-        print("-" * 75)
+                
+                print("Errors:")
+                for error in report["errors"]:
+                    print("  - {}".format(error))
+                print("Warnings:")
+                for warning in report["warnings"]:
+                    print("  - {}".format(warning))
+                print("-" * 75)
     print(
         "Validated {} ISA-Tab archives, {} valid ISA-Tab archives, {} invalid ISA-Tab archives".format(
             numfiles - skipped, numfiles - invalid - skipped, invalid
